@@ -1,3 +1,30 @@
+function initSelect2(selector, url, placeholder, onSelectCallback = null) {
+	// Select Option to Single Value
+  $(selector).select2({
+    placeholder: placeholder,
+    width: '100%',
+    ajax: {
+      url: url,
+      type: "GET",
+      dataType: 'JSON',
+      delay: 250,
+      data: function (params) {
+        return { searchTerm: params.term };
+      },
+      processResults: function (response) {
+        return { results: response };
+      }
+    }
+  });
+
+	// Optional Modular Callback
+  if (onSelectCallback) {
+    $(selector).on('select2:select', function (e) {
+      onSelectCallback(e.params.data);
+    });
+  }
+}
+
 window.theme = {};
 
 // Theme Common Functions

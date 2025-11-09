@@ -124,7 +124,12 @@
           $laporanBody.html(allRows);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          handleSingleCustomError(jqXHR);
+          Swal.fire({
+            title: 'Error !',
+            html: errorThrown,
+            type: 'error',
+            confirmButtonText: 'OK'
+          });
         }
       })
     }

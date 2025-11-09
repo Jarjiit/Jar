@@ -125,17 +125,16 @@ class Gases extends Admin_Controller {
     if (!get_permission($this->role, 'is_view')){
       access_denied();
     }
-    // Filter
-    $filter = ['deleted_at' => NULL, 'stock >' => 0];
     // Column to Detail
-    $gases = $this->master_model->GlobalSelect("tabel_gases", "id, gases", false, $filter);
+    $column = "id, gases, stock";
+    $gases = $this->master_model->GlobalSelect("tabel_gases", $column, false, ['deleted_at' => NULL]);
     $result = array();
     // Insert Single to Array
     foreach ($gases as $value) {
       // Set Array
       $value = (array) $value;
       // Insert to Array
-      $result[] = array("id" => $value['id'], "text" => $value['gases']);
+      $result[] = array("id" => $value['id'], "text" => $value['gases'], "jumlah" => $value["stock"]);
     }
     echo json_encode($result);
   }

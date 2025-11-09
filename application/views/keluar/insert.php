@@ -1,22 +1,23 @@
-<!-- Final OK -->
+<!-- Final Version of Pengeluaran Gas Medis Input Formulir -->
 <!-- Custom Styling -->
 <style>
   .select2-container .select2-selection { height: 38px; }
   .select2-container--default .select2-selection--single .select2-selection__rendered { margin-top: 3px; }
   .select2-container--default .select2-selection--single .select2-selection__arrow { display: none; }
 </style>
-<!-- Wrapper Panel Table Input -->
+<!-- Wrapper Panel on Input of Pengeluaran Gas Medis Formulir -->
 <section class="panel">
+  <!-- Title -->
   <header class="panel-heading">
     <h4 class="panel-title"><i class="far fa-edit"></i>&nbsp;Input Pengeluaran Gas Medis</h4>
   </header>
-  <!-- Form Open -->
+  <!-- Input Formulir -->
   <?php echo form_open('keluar/publish', ['id' => 'form_keluar_gas']); ?>
   <div class="panel-body">
-    <!-- Melakukan Pemilihan Instalasi Minta Linen -->
+    <!-- Melakukan Pengisian Pengeluaran Medical Gases -->
     <div class="form-group">
       <div class="row">
-        <!-- Input Tanggal -->
+        <!-- Tanggal -->
         <div class="col-sm-6">
           <label for="tanggal" class="form-label">Tanggal</label>
           <input type="date" name="tanggal" id="tanggal" class="form-control" required>
@@ -33,12 +34,12 @@
     <table class="table" id="itemsTable">
       <thead>
         <tr>
-          <th>Gas Medis</th>
-          <th>Pagi</th>
-          <th>Siang</th>
-          <th>Malam</th>
-          <th>Total</th>
-          <th>Hapus</th>
+          <th class="text-center" colspan="2">Gas Medis</th>
+          <th class="text-center">Pagi</th>
+          <th class="text-center">Siang</th>
+          <th class="text-center">Malam</th>
+          <th class="text-center">Total</th>
+          <th class="text-center">Hapus</th>
         </tr>
       </thead>
       <tbody>
@@ -47,14 +48,16 @@
     <br>
     <button type="button" id="addRow" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
   </div>
-  <!-- Footer Panel -->
+  <!-- Panel Footer -->
   <div class="panel-footer">
     <div class="row">
+      <!-- Kembali -->
       <div class="col-md-6">
         <button class="btn btn-default pull-left" onclick="history.back(); return false;">
           <i class="fas fa-arrow-left"></i> <?php echo translate('kembali'); ?>
         </button>
       </div>
+      <!-- Final -->
       <div class="col-md-6">
         <button class="btn btn-dark pull-right" type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;<span>Simpan</span></button>
       </div>  
@@ -67,15 +70,16 @@
 $(document).ready(function() {
 
   // === [1] Initialize Gases Dropdowns (Fetch + Setup)
-  globalgases("<?= base_url('gases/GasesOnly') ?>", "gases[]", "all");
+  globalgases("<?= base_url('gases/GasesOnly') ?>", "gases[]", "all", "totali");
 
-  // === [2] Add New Row to Gases Table
+  // === [2] Insert Row
   $('#addRow').click(function() {
     let row = `
       <tr style="height:50px">
-        <td style="width:50%">
+        <td style="width:30%">
           <select name="gases[]" class="form-control gases-select" required></select>
         </td>
+        <td><input type="number" class="totali form-control" style="height:100%" readonly></td>
         <td><input type="number" name="pagi[]" class="form-control" style="height:100%"></td>
         <td><input type="number" name="siang[]" class="form-control" style="height:100%"></td>
         <td><input type="number" name="malam[]" class="form-control" style="height:100%"></td>
@@ -87,17 +91,17 @@ $(document).ready(function() {
 
     let $select = $('#itemsTable tbody tr:last').find('.gases-select');
     
-    // Initialize the Select
+    // Init Select Option
     $select.select2({
       placeholder: "Pilih Gas",
       width: '100%',
       data: [{id: '', text: 'Pilih Gas'}, ...gasOptions]
     });
 
-    // Apply Consistent Style
+    // Apply Style
     $select.next('.select2').find('.select2-selection').css({'margin-top':'1px', 'height':'33px'});
 
-    // Update All Dropdown
+    // Update Select Option
     updateGasesDropdowns("gases[]");
   });
 
@@ -109,19 +113,30 @@ $(document).ready(function() {
 
   // === [4] Total
   $(document).on('input', 'input[name="pagi[]"], input[name="siang[]"], input[name="malam[]"]', function() {
-    // Find the Closest Table Row
+    // Find Closest Table Row
     let $row = $(this).closest('tr');
     
-    // Get the Values, Convert, Default to 0
+    // Get Value, Default to 0 if Unavailable
     let pagi = parseFloat($row.find('input[name="pagi[]"]').val()) || 0;
     let siang = parseFloat($row.find('input[name="siang[]"]').val()) || 0;
     let malam = parseFloat($row.find('input[name="malam[]"]').val()) || 0;
+    let limit = parseInt($row.find('input.totali').val());
     
-    // Calculate the Total
+    // Calculate Total
     let total = pagi + siang + malam;
     
-    // Update the Total Field
-    $row.find('input[name="total[]"]').val(total.toFixed(2)); 
+    if (total <= limit) {
+      // Total Within Limit
+      $row.find('input[name="total[]"]').val(total.toFixed(2));
+    } else {
+      // Fail
+      Swal.fire({
+        title: 'Error !',
+        html: "Melewati Jumlah Milik IPSRS !",
+        type: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   });
 
   // === [5] Tanggal
