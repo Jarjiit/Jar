@@ -1,4 +1,4 @@
-<!-- Final OK -->
+<!-- Final Version of Main Table Pengeluaran Gas Medis View -->
 <!-- Custom Styling -->
 <style>
   .select2-container .select2-selection--single { height: 34px !important; }
@@ -13,7 +13,7 @@
     padding-bottom: 8px;
   }
 </style>
-<!-- Wrapper Panel Input -->
+<!-- Wrapper Panel Input Filter on Table -->
 <section class="panel">
   <header class="panel-heading">
     <h4 class="panel-title"><i class="far fa-edit"></i> Input Tanggal</h4>

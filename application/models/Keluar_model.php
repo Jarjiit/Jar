@@ -1,5 +1,5 @@
 <?php
-// Pengeluaran Controller !
+// Final Version of Pengeluaran Gas Medis Model !
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Keluar_model extends MY_Model {
