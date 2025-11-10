@@ -66,7 +66,6 @@ class Availability_model extends MY_Model {
 
   public function DetailPrima($uuid){
     // Detail on Meta Data Stock Opname Table
-    // trial_error($uuid);
     $column = "uuid, tanggal, user";
     $sqlquery = "SELECT $column FROM tabel_logging WHERE uuid = ?";
     $query = $this->db->query($sqlquery, [$uuid]);
@@ -75,7 +74,6 @@ class Availability_model extends MY_Model {
 
   public function DetailResult($uuid){
     // Detail on Stock Opname Content Medical Gases
-    // trial_error($uuid);
     $column = "tld.gases as gsid, tg.gases, tld.sistem, tld.fisik, tld.selisih";
     $joined = "JOIN tabel_gases tg ON tld.gases = tg.id";
     $sqlquery = "SELECT $column FROM tabel_logging_details tld $joined WHERE tld.logging = ?";
