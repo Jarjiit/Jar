@@ -61,7 +61,7 @@
                     <?php if(get_permission('ipsrs', 'is_view') || get_permission('ipsrs', 'is_add') || get_permission('ipsrs', 'is_edit') || get_permission('ipsrs', 'is_delete')) { ?>
 					<!-- Stock Opname -->
                     <li class="<?php if ($main_menu == 'inventory') echo 'nav-active'; ?>">
-                    <li class="<?php if ($sub_page == 'inventory/index' || $sub_page == 'inventory/index' || $sub_page == 'inventory/index') echo 'nav-active'; ?>">
+                    <li class="<?php if ($sub_page == 'inventory/index' || $sub_page == 'inventory/insert' || $sub_page == 'inventory/detail/') echo 'nav-active'; ?>">
                         <a href="<?php echo base_url('inventory'); ?>"><i class="fa fa-balance-scale"></i><span>Stock Opname</span></a>
                     </li>
 					<?php } ?>
