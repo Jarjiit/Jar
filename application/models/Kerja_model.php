@@ -112,5 +112,37 @@ class Kerja_model extends MY_Model {
     // ?
     $this->db->insert('tabel_kerja_sama_history', $result);
   }
+
+  public function TabelDeliver(){
+    // Tabel History Penerimaan Liquid Oxygen
+    $sqlquery = "SELECT * FROM tabel_penerimaan_liquid";
+    $result = $this->db->query($sqlquery);
+    return $result->result_array();
+  }
+
+  public function PublishDeliver($inputs){
+    // Model Publish Tabel Penerimaan
+    // Define Penerimaan Unique Identifier
+    $uuid = !empty($inputs['uuid']) ? $inputs['uuid'] : $this->uuid->v4();
+    // Variable Input
+    $insert = array(
+      "uuid" => $uuid,
+      "order" => $inputs['order'],
+      "tanggal" => $inputs['tanggal'],
+      "user" => $inputs['user'],
+      "berat_awal" => $inputs['berat_awal'],
+      "berat_akhir" => $inputs['berat_akhir'],
+      "jumlah" => $inputs['terima']
+    );
+    // Publish Data & Result
+    return $this->db->insert('tabel_penerimaan_liquid', $insert);
+  }
+
+  public function DetailDeliver($uuid){
+    // Detail Penerimaan Gas Medis
+    $sqlquery = "SELECT * FROM tabel_penerimaan_liquid WHERE uuid = ?";
+    $result = $this->db->query($sqlquery, [$uuid]);
+    return $result->row_array();
+  }
 }
 ?>

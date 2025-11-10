@@ -14,7 +14,7 @@ class Supplier extends Admin_Controller {
   }
 
   public function index(){
-    // Function to Handle Main File of Supplier
+    // Controller Supplier Main File (Single File)
     if (!get_permission($this->role, 'is_view')){
       access_denied();
     }
@@ -26,7 +26,7 @@ class Supplier extends Admin_Controller {
   }
 
   public function supplier(){
-    // Function to Return All Data of Supplier
+    // Function to Return All Data of Supplier (Support Supplier Main File)
     $datatables = $this->supplier_model->TableSupplier();
     $datatables = json_decode($datatables, true);
     $datatables = $datatables['data'];
