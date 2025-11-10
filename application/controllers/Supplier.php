@@ -1,5 +1,5 @@
 <?php
-// Final Version of Supplier Controller !
+// Final Version of Supplier Controller ! Supplier Controller !
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Supplier extends Admin_Controller {

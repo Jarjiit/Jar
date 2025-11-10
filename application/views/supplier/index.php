@@ -1,5 +1,4 @@
-
-<!-- Final Version of Supplier -->
+<!-- Final Version of Supplier ! Supplier OK ! -->
 <!-- Custom Styling -->
 <style>
   .select2-container .select2-selection { height: 34px; }

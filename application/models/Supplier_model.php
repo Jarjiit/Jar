@@ -1,5 +1,5 @@
 <?php
-// Final Version of Supplier Model !
+// Final Version of Supplier Model ! Supplier Model !
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Supplier_model extends MY_Model {
