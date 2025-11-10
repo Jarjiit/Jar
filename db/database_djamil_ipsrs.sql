@@ -1,0 +1,55 @@
+USE djamil_gases;
+
+-- Tabel Gases
+DROP TABLE IF EXISTS `tabel_gases`;
+CREATE TABLE `tabel_gases` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `gases` VARCHAR(150) NOT NULL,
+  `unit` VARCHAR(25) NOT NULL,
+  `stock` INT NOT NULL DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL,
+  `deleted_by` VARCHAR(100) NULL
+);
+
+DROP TABLE IF EXISTS `tabel_logging`;
+CREATE TABLE `tabel_logging` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `uuid` VARCHAR(36) NOT NULL UNIQUE,
+  `tanggal` DATE NOT NULL,
+  `user` VARCHAR(100) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS `tabel_logging_details`;
+CREATE TABLE `tabel_logging_details` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `logging` VARCHAR(36) NOT NULL,
+  `gases` INT NOT NULL,
+  `sistem` INT NOT NULL DEFAULT 0,
+  `fisik` INT NOT NULL DEFAULT 0,
+  `selisih` INT NOT NULL DEFAULT 0,
+  `price` DECIMAL(15, 2) NOT NULL DEFAULT 0,
+  FOREIGN KEY (`logging`) REFERENCES `tabel_logging`(`uuid`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (`gases`) REFERENCES `tabel_gases`(`id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS `tabel_pengeluaran`;
+CREATE TABLE `tabel_pengeluaran` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `tanggal` DATE NOT NULL,
+  `user` VARCHAR(100) NOT NULL,
+  `gases` INT NOT NULL,
+  `pagi` INT NOT NULL DEFAULT 0,
+  `sore` INT NOT NULL DEFAULT 0,
+  `malam` INT NOT NULL DEFAULT 0,
+  `total` INT NOT NULL DEFAULT 0,
+  CONSTRAINT `fk_gas_id` FOREIGN KEY (`gases`) REFERENCES `tabel_gases` (`id`) 
+    ON DELETE RESTRICT 
+    ON UPDATE CASCADE
+);

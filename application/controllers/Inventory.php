@@ -8,7 +8,7 @@ class Inventory extends Admin_Controller {
   // Parent Class Construct & Role & Variable
   public function __construct(){
     parent::__construct();
-    $this->role = 'gases';
+    $this->role = 'ipsrs';
     $this->load->model(array('availability_model'));
   }
 

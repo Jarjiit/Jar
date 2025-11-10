@@ -51,10 +51,32 @@
                     </li>
 					<?php } ?>
 					
-					<?php if(get_permission('vendor', 'is_view') || get_permission('vendor', 'is_add') || get_permission('vendor', 'is_edit') || get_permission('vendor', 'is_delete')) { ?>
-					<!-- VENDOR -->
-                    <li class="<?php if ($main_menu == 'vendor') echo 'nav-active'; ?>">
-                        <a href="<?php echo base_url('vendor'); ?>"><i class="fab fa-dashcube"></i><span>Vendor</span></a>
+					<?php if(get_permission('supplier', 'is_view') || get_permission('supplier', 'is_add') || get_permission('supplier', 'is_edit') || get_permission('supplier', 'is_delete')) { ?>
+					<!-- Supplier -->
+                    <li class="<?php if ($main_menu == 'supplier') echo 'nav-active'; ?>">
+                        <a href="<?php echo base_url('supplier'); ?>"><i class="fab fa-dashcube"></i><span>Supplier</span></a>
+                    </li>
+					<?php } ?>
+
+                    <?php if(get_permission('ipsrs', 'is_view') || get_permission('ipsrs', 'is_add') || get_permission('ipsrs', 'is_edit') || get_permission('ipsrs', 'is_delete')) { ?>
+					<!-- Stock Opname -->
+                    <li class="<?php if ($main_menu == 'inventory') echo 'nav-active'; ?>">
+                    <li class="<?php if ($sub_page == 'inventory/index' || $sub_page == 'inventory/index' || $sub_page == 'inventory/index') echo 'nav-active'; ?>">
+                        <a href="<?php echo base_url('inventory'); ?>"><i class="fa fa-balance-scale"></i><span>Stock Opname</span></a>
+                    </li>
+					<?php } ?>
+                    
+                    <?php if(get_permission('gases', 'is_view') || get_permission('gases', 'is_add') || get_permission('gases', 'is_edit') || get_permission('gases', 'is_delete')) { ?>
+					<!-- Master Gas -->
+                    <li class="<?php if ($main_menu == 'gases') echo 'nav-active'; ?>">
+                        <a href="<?php echo base_url('gases'); ?>"><i class="fa fa-table"></i><span>Master Gas Medis</span></a>
+                    </li>
+					<?php } ?>
+
+                    <?php if(get_permission('pengeluaran', 'is_view') || get_permission('pengeluaran', 'is_add') || get_permission('pengeluaran', 'is_edit') || get_permission('pengeluaran', 'is_delete')) { ?>
+					<!-- Pengeluaran Gas Medis -->
+                    <li class="<?php if ($sub_page == 'keluar/index' || $sub_page == 'keluar/index' || $sub_page == 'keluar/index') echo 'nav-active'; ?>">
+                        <a href="<?php echo base_url('keluar'); ?>"><i class="fa fa-shopping-cart"></i><span>Pengeluaran Gas Medis</span></a>
                     </li>
 					<?php } ?>
                     
