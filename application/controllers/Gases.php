@@ -1,5 +1,5 @@
 <?php
-// Final Version of Medical Gases Controller !
+// Final Version of Medical Gases Controller ! Medical Gases !
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Gases extends Admin_Controller {

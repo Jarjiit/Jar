@@ -1,5 +1,5 @@
 <?php
-// Final Version of Master Medical Gases Supplier !
+// Final Version of Master Medical Gases Supplier ! Medical Gases !
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Master_model extends MY_Model {
